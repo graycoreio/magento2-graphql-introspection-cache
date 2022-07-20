@@ -2,8 +2,12 @@
     "name": "graycore/magento2-graphql-introspection-cache",
     "type": "magento2-module",
     "require": {
+        "php": ">=7.4",
         "magento/framework": "^102.0 || ^103.0",
-        "php": ">=7.4"
+        "magento/module-catalog": "^104.0",
+        "magento/module-eav": "^102.1",
+        "magento/module-graph-ql": "^100.4",
+        "magento/module-graph-ql-cache": "^100.4"
     },
     "require-dev": {
         "magento/magento-coding-standard": ">=6.0",
@@ -41,7 +45,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "magento/composer-dependency-version-audit-plugin": true
+            "magento/composer-dependency-version-audit-plugin": true,
+            "magento/magento-composer-installer": false
         }
     }
 }
