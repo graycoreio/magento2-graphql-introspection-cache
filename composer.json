@@ -5,7 +5,7 @@
         "php": ">=7.4",
         "magento/framework": "^102.0 || ^103.0",
         "magento/module-catalog": "^104.0",
-        "magento/module-eav": "^102.1",
+        "magento/module-eav": "^102.0",
         "magento/module-graph-ql": "^100.0.0",
         "magento/module-graph-ql-cache": "^100.0.0"
     },
