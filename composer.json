@@ -15,5 +15,8 @@
         "psr-4": {
             "Graycore\\GraphQlIntrospectionCache\\": ""
         }
+    },
+    "scripts": {
+        "unit-test": "vendor/bin/phpunit ./Test/Unit"
     }
 }

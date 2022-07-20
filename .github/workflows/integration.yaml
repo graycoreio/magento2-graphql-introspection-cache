@@ -1,0 +1,29 @@
+name: Integration Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compute_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.supported-version.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: graycoreio/github-actions-magento2/supported-version@main
+        id: supported-version
+      - run: echo ${{ steps.supported-version.outputs.matrix }}
+  integration-workflow:
+    needs: compute_matrix
+    uses: graycoreio/github-actions-magento2/.github/workflows/integration.yaml@main
+    with:
+      package_name: graycore/magento2-cors
+      matrix: ${{ needs.compute_matrix.outputs.matrix }}
+      test_command: ../../../vendor/bin/phpunit ../../../vendor/graycore/magento2-graphql-introspection-cache/Test/Integration
+    secrets:
+      composer_auth: ${{ secrets.COMPOSER_AUTH }}
