@@ -22,7 +22,7 @@ class ProductAttributeFilterInputTest extends TestCase
         ]);
     }
 
-    public function testCorrectIdentitiesAreReturned()
+    public function testCorrectAttributeIdentitiesAreReturned()
     {
         $attributes = [
             'name' => 10,
