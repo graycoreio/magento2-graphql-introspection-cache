@@ -6,8 +6,8 @@
         "magento/framework": "^102.0 || ^103.0",
         "magento/module-catalog": "^104.0",
         "magento/module-eav": "^102.1",
-        "magento/module-graph-ql": "^100.4",
-        "magento/module-graph-ql-cache": "^100.4"
+        "magento/module-graph-ql": "^100.0.0",
+        "magento/module-graph-ql-cache": "^100.0.0"
     },
     "require-dev": {
         "magento/magento-coding-standard": ">=6.0",
