@@ -41,12 +41,9 @@ EOF
         $cacheableQuery = $this->om->get(CacheableQuery::class);
         $this->assertEmpty($cacheableQuery->getCacheTags());
 
-        /** @var Http $result */
-        $result = $this->om->create(GraphQl::class)->dispatch($this->createProductAttributeIntrospectionRequest());
+        $this->om->create(GraphQl::class)->dispatch($this->createProductAttributeIntrospectionRequest());
 
         $this->assertNotEmpty($cacheableQuery->getCacheTags());
         $this->assertTrue($cacheableQuery->isCacheable());
-
-        $this->assertEquals(true, true);
     }
 }
