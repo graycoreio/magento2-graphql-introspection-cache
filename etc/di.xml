@@ -7,7 +7,7 @@
     </type>
     <type name="Magento\Framework\GraphQl\Query\QueryProcessor">
         <plugin name="set_executor_plugin"
-                type="Graycore\GraphQlIntrospectionCache\Plugin\SetExecutorPlugin"/>
+                type="Graycore\GraphQlIntrospectionCache\Plugin\ExecutorPlugin"/>
     </type>
     <type name="Graycore\GraphQlIntrospectionCache\Plugin\CachePlugin">
         <arguments>

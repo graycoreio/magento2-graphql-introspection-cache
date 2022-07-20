@@ -8,7 +8,7 @@ use GraphQL\Executor\ReferenceExecutor;
 use Magento\Framework\GraphQl\Query\QueryProcessor;
 use Magento\Framework\ObjectManagerInterface;
 
-class SetExecutorPlugin
+class ExecutorPlugin
 {
     private ObjectManagerInterface $objectManager;
 
