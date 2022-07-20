@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="GraphQL\Executor\ReferenceExecutor">
+        <plugin name="cache_plugin"
+                type="Graycore\GraphQlIntrospectionCache\Plugin\CachePlugin"/>
+    </type>
+    <type name="Magento\Framework\GraphQl\Query\QueryProcessor">
+        <plugin name="set_executor_plugin"
+                type="Graycore\GraphQlIntrospectionCache\Plugin\SetExecutorPlugin"/>
+    </type>
+    <type name="Graycore\GraphQlIntrospectionCache\Plugin\CachePlugin">
+        <arguments>
+            <argument xsi:type="array" name="introspectionHandlers">
+                <item xsi:type="object" name="ProductAttributeFilterInput">Graycore\GraphQlIntrospectionCache\Model\Cache\Identity\Introspection\ProductAttributeFilterInput</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

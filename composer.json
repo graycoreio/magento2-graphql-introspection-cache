@@ -1,0 +1,19 @@
+{
+    "name": "graycore/magento2-graphql-introspection-cache",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "php": ">=7.4"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Graycore\\GraphQlIntrospectionCache\\": ""
+        }
+    }
+}
