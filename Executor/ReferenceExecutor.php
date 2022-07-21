@@ -12,32 +12,31 @@ use GraphQL\Type\Schema;
 use GraphQL\Utils\Utils;
 use Magento\Framework\App\ObjectManager;
 use ReflectionMethod;
+use ReflectionProperty;
 use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
-    /** @var object */
-    protected static $UNDEFINED;
-
-    /** @var ExecutionContext */
-    protected $exeContext;
-
-    /** @var SplObjectStorage */
-    protected $subFieldCache;
-
     /** @var ReferenceExecutor|null */
     private static ?self $executorInstance = null;
+
+    private function setPrivateProperty(string $property, $value, bool $static = false): void
+    {
+        try {
+            $reflectionProperty = new ReflectionProperty(\GraphQL\Executor\ReferenceExecutor::class, $property);
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($static ? null : $this, $value);
+        } catch (\ReflectionException $e) {}
+    }
 
     protected function __construct(ExecutionContext $context)
     {
         if (is_callable('parent::__construct')) {
             parent::__construct($context);
         } else {
-            if (!static::$UNDEFINED) {
-                static::$UNDEFINED = Utils::undefined();
-            }
-            $this->exeContext = $context;
-            $this->subFieldCache = new SplObjectStorage();
+            $this->setPrivateProperty('UNDEFINED', Utils::undefined(), true);
+            $this->setPrivateProperty('exeContext', $context);
+            $this->setPrivateProperty('subFieldCache', new SplObjectStorage());
         }
     }
 
