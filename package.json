@@ -1,0 +1,24 @@
+{
+  "name": "@graycore/magento2-graphql-introspection-cache",
+  "description": "A Magento 2 module that enables caching of GraphQl introspection queries.",
+  "version": "0.1.0",
+  "directories": {
+    "doc": "docs"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graycoreio/magento2-graphql-introspection-cache.git"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graycoreio/magento2-graphql-introspection-cache/issues"
+  },
+  "homepage": "https://github.com/graycoreio/magento2-graphql-introspection-cache#readme",
+  "devDependencies": {
+    "standard-version": "^9.1.1"
+  }
+}
