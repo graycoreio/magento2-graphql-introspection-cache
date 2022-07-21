@@ -31,7 +31,7 @@ composer require graycore/magento2-graphql-introspection-cache
 2. Enable the package
 
 ```bash
-./bin/magento module:enable GraphQlIntrospectionCache
+./bin/magento module:enable Graycore_GraphQlIntrospectionCache
 ```
 
 ## Usage
