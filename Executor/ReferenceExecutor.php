@@ -11,6 +11,7 @@ use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\Utils;
 use Magento\Framework\App\ObjectManager;
+use ReflectionMethod;
 use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
@@ -54,7 +55,13 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             return self::$executorInstance;
         }
 
-        $exeContext = static::buildExecutionContext(
+        $reflectionMethod = new ReflectionMethod(\GraphQL\Executor\ReferenceExecutor::class, 'buildExecutionContext');
+        if ($reflectionMethod->isPrivate()) {
+            $reflectionMethod->setAccessible(true);
+        }
+
+        $exeContext = $reflectionMethod->invoke(
+            null,
             $schema,
             $documentNode,
             $rootValue,
