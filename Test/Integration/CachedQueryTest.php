@@ -9,6 +9,9 @@ use Magento\TestFramework\Request;
 use PHPUnit\Framework\TestCase;
 use Magento\TestFramework\ObjectManager;
 
+/**
+ * @magentoAppArea graphql
+ */
 class CachedQueryTest extends TestCase
 {
     private $om;

@@ -17,27 +17,26 @@ use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
-    /** @var ReferenceExecutor|null */
     private static ?self $executorInstance = null;
-
-    private function setPrivateProperty(string $property, $value, bool $static = false): void
-    {
-        try {
-            $reflectionProperty = new ReflectionProperty(\GraphQL\Executor\ReferenceExecutor::class, $property);
-            $reflectionProperty->setAccessible(true);
-            $reflectionProperty->setValue($static ? null : $this, $value);
-        } catch (\ReflectionException $e) {}
-    }
 
     protected function __construct(ExecutionContext $context)
     {
         if (is_callable('parent::__construct')) {
             parent::__construct($context);
         } else {
-            $this->setPrivateProperty('UNDEFINED', Utils::undefined(), true);
-            $this->setPrivateProperty('exeContext', $context);
-            $this->setPrivateProperty('subFieldCache', new SplObjectStorage());
+            $this->setExecutorPrivateProp('UNDEFINED', Utils::undefined(), true);
+            $this->setExecutorPrivateProp('exeContext', $context);
+            $this->setExecutorPrivateProp('subFieldCache', new SplObjectStorage());
         }
+    }
+
+    private function setExecutorPrivateProp(string $property, $value, bool $static = false): void
+    {
+        try {
+            $reflectionProperty = new ReflectionProperty(\GraphQL\Executor\ReferenceExecutor::class, $property);
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($static ? null : $this, $value);
+        } catch (\ReflectionException $e) {}
     }
 
     public static function create(
@@ -72,7 +71,8 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         );
 
         if (is_array($exeContext)) {
-            return new class($promiseAdapter->createFulfilled(new ExecutionResult(null, $exeContext))) implements ExecutorImplementation
+            $promise = $promiseAdapter->createFulfilled(new ExecutionResult(null, $exeContext));
+            return new class($promise) implements ExecutorImplementation
             {
                 private Promise $result;
 
