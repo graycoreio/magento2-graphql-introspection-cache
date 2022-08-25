@@ -17,8 +17,6 @@ use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
-    private static ?self $executorInstance = null;
-
     protected function __construct(ExecutionContext $context)
     {
         if (is_callable('parent::__construct')) {
@@ -49,10 +47,6 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         ?string $operationName,
         callable $fieldResolver
     ) : ExecutorImplementation {
-        if (self::$executorInstance !== null) {
-            return self::$executorInstance;
-        }
-
         $reflectionMethod = new ReflectionMethod(\GraphQL\Executor\ReferenceExecutor::class, 'buildExecutionContext');
         if ($reflectionMethod->isPrivate()) {
             $reflectionMethod->setAccessible(true);
@@ -88,7 +82,7 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             };
         }
 
-        return self::$executorInstance = ObjectManager::getInstance()->create(
+        return ObjectManager::getInstance()->create(
             ReferenceExecutor::class,
             ['context' => $exeContext]
         );
