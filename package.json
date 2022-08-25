@@ -1,7 +1,7 @@
 {
   "name": "@graycore/magento2-graphql-introspection-cache",
   "description": "A Magento 2 module that enables caching of GraphQl introspection queries.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "directories": {
     "doc": "docs"
   },

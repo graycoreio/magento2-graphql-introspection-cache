@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/graycoreio/magento2-graphql-introspection-cache/compare/v0.1.1...v0.1.2) (2022-08-25)
+
+
+### Bug Fixes
+
+* ensure reference executor always returns a new object ([#6](https://github.com/graycoreio/magento2-graphql-introspection-cache/issues/6)) ([9daede3](https://github.com/graycoreio/magento2-graphql-introspection-cache/commit/9daede31b3de7cab58973bdb54ed9a636560bd01))
+
 ### 0.1.1 (2022-07-21)
 
 
