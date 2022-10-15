@@ -1,4 +1,4 @@
-name: Integration Test
+name: Installation Test
 
 on:
   workflow_dispatch: {}
@@ -27,16 +27,22 @@ jobs:
     outputs:
       matrix: ${{ steps.supported-version.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v2
       - uses: graycoreio/github-actions-magento2/supported-version@main
         id: supported-version
       - run: echo ${{ steps.supported-version.outputs.matrix }}
-  integration-workflow:
+
+  install-test:
     needs: compute_matrix
-    uses: graycoreio/github-actions-magento2/.github/workflows/integration.yaml@main
-    with:
-      package_name: graycore/magento2-graphql-introspection-cache
-      matrix: ${{ needs.compute_matrix.outputs.matrix }}
-      test_command: ../../../vendor/bin/phpunit ../../../vendor/graycore/magento2-graphql-introspection-cache/Test/Integration
-    secrets:
-      composer_auth: ${{ secrets.COMPOSER_AUTH }}
+    strategy:
+      matrix: ${{ fromJSON(needs.compute_matrix.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: graycoreio/github-actions-magento2/installation-test@main
+      with:
+        composer_version: ${{ matrix.composer }}
+        php_version: ${{ matrix.php }}
+        magento_version: ${{ matrix.magento }}
+        composer_auth: ${{ secrets.COMPOSER_AUTH }}
+        package_name: graycore/magento2-graphql-introspection-cache
+        source_folder: $GITHUB_WORKSPACE
