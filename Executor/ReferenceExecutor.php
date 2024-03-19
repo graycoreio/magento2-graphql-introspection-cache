@@ -19,7 +19,7 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
     protected function __construct(ExecutionContext $context)
     {
-        if (is_callable('parent::__construct')) {
+        if (is_callable('parent::class::__construct')) {
             parent::__construct($context);
         } else {
             $this->setExecutorPrivateProp('UNDEFINED', Utils::undefined(), true);
