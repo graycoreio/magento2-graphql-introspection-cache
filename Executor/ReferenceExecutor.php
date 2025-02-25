@@ -44,7 +44,7 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         DocumentNode $documentNode,
         $rootValue,
         $contextValue,
-        array $variableValues,
+        $variableValues,
         ?string $operationName,
         callable $fieldResolver,
         ?callable $argsMapper = null, // TODO make non-optional in next major release
