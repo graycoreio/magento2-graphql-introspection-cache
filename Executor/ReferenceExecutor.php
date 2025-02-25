@@ -4,6 +4,7 @@ namespace Graycore\GraphQlIntrospectionCache\Executor;
 
 use GraphQL\Executor\ExecutionContext;
 use GraphQL\Executor\ExecutionResult;
+use GraphQL\Executor\Executor;
 use GraphQL\Executor\ExecutorImplementation;
 use GraphQL\Executor\Promise\Promise;
 use GraphQL\Executor\Promise\PromiseAdapter;
@@ -17,9 +18,9 @@ use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
-    protected function __construct(ExecutionContext $context)
+    public function __construct(ExecutionContext $context)
     {
-        if (is_callable('parent::__construct')) {
+        if (method_exists(parent::class, '__construct')) {
             parent::__construct($context);
         } else {
             $this->setExecutorPrivateProp('UNDEFINED', Utils::undefined(), true);
