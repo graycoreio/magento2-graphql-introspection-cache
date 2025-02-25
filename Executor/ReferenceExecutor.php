@@ -44,10 +44,11 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         DocumentNode $documentNode,
         $rootValue,
         $contextValue,
-        $variableValues,
+        array $variableValues,
         ?string $operationName,
-        callable $fieldResolver
-    ) : ExecutorImplementation {
+        callable $fieldResolver,
+        ?callable $argsMapper = null, // TODO make non-optional in next major release
+    ): ExecutorImplementation {
         $reflectionMethod = new ReflectionMethod(\GraphQL\Executor\ReferenceExecutor::class, 'buildExecutionContext');
         if ($reflectionMethod->isPrivate()) {
             $reflectionMethod->setAccessible(true);
@@ -62,7 +63,8 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             $variableValues,
             $operationName,
             $fieldResolver,
-            $promiseAdapter
+            $argsMapper ?? Executor::getDefaultArgsMapper(),
+            $promiseAdapter,
         );
 
         if (is_array($exeContext)) {
