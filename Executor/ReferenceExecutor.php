@@ -54,7 +54,8 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             $reflectionMethod->setAccessible(true);
         }
 
-        $exeContext = $reflectionMethod->invoke(
+        // Old args, before v15
+        $args = [
             null,
             $schema,
             $documentNode,
@@ -63,8 +64,26 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             $variableValues,
             $operationName,
             $fieldResolver,
-            $argsMapper ?? Executor::getDefaultArgsMapper(),
             $promiseAdapter,
+        ];
+        // 
+        if($argsMapper || \method_exists(Executor::class, 'getDefaultArgsMapper')){
+            $args = [
+                null,
+                $schema,
+                $documentNode,
+                $rootValue,
+                $contextValue,
+                $variableValues,
+                $operationName,
+                $fieldResolver,
+                $argsMapper ?? Executor::getDefaultArgsMapper(),
+                $promiseAdapter,
+            ];
+        }
+
+        $exeContext = $reflectionMethod->invoke(
+            ...$args
         );
 
         if (is_array($exeContext)) {
