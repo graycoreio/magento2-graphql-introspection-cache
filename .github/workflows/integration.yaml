@@ -27,13 +27,11 @@ jobs:
     outputs:
       matrix: ${{ steps.supported-version.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: mage-os/github-actions/supported-version@main
+      - uses: graycoreio/github-actions/supported-version@main
         id: supported-version
-      - run: echo ${{ steps.supported-version.outputs.matrix }}
   integration-workflow:
     needs: compute_matrix
-    uses: mage-os/github-actions/.github/workflows/integration.yaml@main
+    uses: graycoreio/github-actions/.github/workflows/integration.yaml@main
     with:
       package_name: graycore/magento2-graphql-introspection-cache
       matrix: ${{ needs.compute_matrix.outputs.matrix }}

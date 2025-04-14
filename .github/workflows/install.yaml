@@ -27,9 +27,8 @@ jobs:
     outputs:
       matrix: ${{ steps.supported-version.outputs.matrix }}
     steps:
-      - uses: mage-os/github-actions/supported-version@main
+      - uses: graycoreio/github-actions/supported-version@main
         id: supported-version
-      - run: echo ${{ steps.supported-version.outputs.matrix }}
 
   install-test:
     needs: compute_matrix
@@ -37,8 +36,8 @@ jobs:
       matrix: ${{ fromJSON(needs.compute_matrix.outputs.matrix) }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: mage-os/github-actions/installation-test@main
+    - uses: actions/checkout@v4
+    - uses: graycoreio/github-actions/installation-test@main
       with:
         composer_version: ${{ matrix.composer }}
         php_version: ${{ matrix.php }}

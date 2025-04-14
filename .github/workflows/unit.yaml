@@ -29,10 +29,11 @@ jobs:
           - 8.1
           - 8.2
           - 8.3
+          - 8.4
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: mage-os/github-actions/unit-test@main
+      - uses: actions/checkout@v4
+      - uses: graycoreio/github-actions/unit-test@main
         with:
           php_version: ${{ matrix.php_version }}
           composer_auth: ${{ secrets.COMPOSER_AUTH }}
