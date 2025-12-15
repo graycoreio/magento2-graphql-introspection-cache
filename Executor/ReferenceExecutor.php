@@ -18,6 +18,11 @@ use SplObjectStorage;
 
 class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 {
+    /**
+     * Initialize executor with execution context.
+     *
+     * @param ExecutionContext $context
+     */
     public function __construct(ExecutionContext $context)
     {
         if (method_exists(parent::class, '__construct')) {
@@ -29,15 +34,30 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         }
     }
 
+    /**
+     * Set a private property on the parent executor class via reflection.
+     *
+     * @param string $property
+     * @param mixed $value
+     * @param bool $static
+     * @return void
+     */
     private function setExecutorPrivateProp(string $property, $value, bool $static = false): void
     {
         try {
             $reflectionProperty = new ReflectionProperty(\GraphQL\Executor\ReferenceExecutor::class, $property);
             $reflectionProperty->setAccessible(true);
             $reflectionProperty->setValue($static ? null : $this, $value);
-        } catch (\ReflectionException $e) {}
+            // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock.DetectedCatch
+        } catch (\ReflectionException $e) {
+            // Property may not exist in all versions of graphql-php, silently ignore
+        }
     }
 
+    /**
+     * @inheritdoc
+     */
+    // phpcs:ignore Magento2.Functions.StaticFunction.StaticFunction
     public static function create(
         PromiseAdapter $promiseAdapter,
         Schema $schema,
@@ -47,7 +67,7 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
         $variableValues,
         ?string $operationName,
         callable $fieldResolver,
-        ?callable $argsMapper = null, // TODO make non-optional in next major release
+        ?callable $argsMapper = null,
     ): ExecutorImplementation {
         $reflectionMethod = new ReflectionMethod(\GraphQL\Executor\ReferenceExecutor::class, 'buildExecutionContext');
         if ($reflectionMethod->isPrivate()) {
@@ -66,8 +86,8 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
             $fieldResolver,
             $promiseAdapter,
         ];
-        // 
-        if($argsMapper || \method_exists(Executor::class, 'getDefaultArgsMapper')){
+
+        if ($argsMapper || \method_exists(Executor::class, 'getDefaultArgsMapper')) {
             $args = [
                 null,
                 $schema,
@@ -88,16 +108,28 @@ class ReferenceExecutor extends \GraphQL\Executor\ReferenceExecutor
 
         if (is_array($exeContext)) {
             $promise = $promiseAdapter->createFulfilled(new ExecutionResult(null, $exeContext));
+            // phpcs:ignore Magento2.Functions.DiscouragedFunction
             return new class($promise) implements ExecutorImplementation
             {
+                /**
+                 * @var Promise
+                 */
                 private Promise $result;
 
+                /**
+                 * @param Promise $result
+                 */
                 public function __construct(Promise $result)
                 {
                     $this->result = $result;
                 }
 
-                public function doExecute() : Promise
+                /**
+                 * Execute and return the promise result.
+                 *
+                 * @return Promise
+                 */
+                public function doExecute(): Promise
                 {
                     return $this->result;
                 }

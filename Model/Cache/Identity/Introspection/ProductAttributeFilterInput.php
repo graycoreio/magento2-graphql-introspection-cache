@@ -11,9 +11,20 @@ use Magento\Framework\GraphQl\Query\Resolver\IdentityInterface;
 
 class ProductAttributeFilterInput implements IdentityInterface
 {
+    /**
+     * @var AttributeRepositoryInterface
+     */
     private AttributeRepositoryInterface $attributeRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
     private SearchCriteriaBuilder $searchCriteriaBuilder;
 
+    /**
+     * @param AttributeRepositoryInterface $attributeRepository
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     */
     public function __construct(
         AttributeRepositoryInterface $attributeRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder
@@ -22,6 +33,12 @@ class ProductAttributeFilterInput implements IdentityInterface
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
+    /**
+     * Get cache identities for product attribute filter input introspection.
+     *
+     * @param array $resolvedData
+     * @return array
+     */
     public function getIdentities(array $resolvedData): array
     {
         return array_map(

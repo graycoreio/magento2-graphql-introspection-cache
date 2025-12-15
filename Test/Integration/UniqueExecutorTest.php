@@ -30,7 +30,8 @@ class UniqueExecutorTest extends TestCase
             null,
             [],
             null,
-            function() {}
+            function () {
+            }
         );
 
         $second = ReferenceExecutor::create(
@@ -41,7 +42,8 @@ class UniqueExecutorTest extends TestCase
             null,
             [],
             null,
-            function() {}
+            function () {
+            }
         );
 
         $this->assertNotEquals(spl_object_id($first), spl_object_id($second));

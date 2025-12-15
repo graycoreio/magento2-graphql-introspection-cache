@@ -11,10 +11,26 @@ use Magento\GraphQlCache\Model\CacheableQuery;
 
 class CachePlugin
 {
+    /**
+     * @var CacheableQuery
+     */
     private CacheableQuery $cacheableQuery;
+
+    /**
+     * @var SyncPromiseAdapter
+     */
     private SyncPromiseAdapter $syncPromiseAdapter;
+
+    /**
+     * @var array
+     */
     private array $introspectionHandlers;
 
+    /**
+     * @param CacheableQuery $cacheableQuery
+     * @param SyncPromiseAdapter $syncPromiseAdapter
+     * @param array $introspectionHandlers
+     */
     public function __construct(
         CacheableQuery $cacheableQuery,
         SyncPromiseAdapter $syncPromiseAdapter,
@@ -25,6 +41,13 @@ class CachePlugin
         $this->introspectionHandlers = $introspectionHandlers;
     }
 
+    /**
+     * After executing a GraphQL query, add cache tags for introspection queries.
+     *
+     * @param ReferenceExecutor $subject
+     * @param Promise $result
+     * @return Promise
+     */
     public function afterDoExecute(ReferenceExecutor $subject, Promise $result): Promise
     {
         $executionContext = (Closure::bind(fn() => $this->exeContext, $subject, ReferenceExecutor::class))();
@@ -38,11 +61,12 @@ class CachePlugin
             }
 
             foreach ($selection->arguments as $argument) {
-                if ($argument->name->value !== 'name' || !isset($this->introspectionHandlers[$argument->value->value])) {
+                $handlerKey = $argument->value->value;
+                if ($argument->name->value !== 'name' || !isset($this->introspectionHandlers[$handlerKey])) {
                     continue;
                 }
 
-                $cacheIdentity = $this->introspectionHandlers[$argument->value->value];
+                $cacheIdentity = $this->introspectionHandlers[$handlerKey];
                 if ($cacheIdentity instanceof IdentityInterface) {
                     $this->cacheableQuery->addCacheTags(
                         $cacheIdentity->getIdentities($this->syncPromiseAdapter->wait($result)->data)

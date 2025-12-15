@@ -14,6 +14,9 @@ use Magento\TestFramework\ObjectManager;
  */
 class CachedQueryTest extends TestCase
 {
+    /**
+     * @var ObjectManager
+     */
     private $om;
 
     protected function setUp(): void
@@ -35,7 +38,7 @@ query introspectionTest {
     }
 }
 EOF
-);
+        );
     }
 
     public function testProductAttributeIntrospectionRequestHasCacheTags(): void

@@ -10,7 +10,13 @@ class ExecutorPlugin
 {
     /**
      * Before processing a GraphQL query, replace the factory with a wrapper that uses the object manager.
+     *
      * This allows us to create plugins on the ReferenceExecutor.
+     *
+     * @param QueryProcessor $subject
+     * @param array $args
+     * @return array
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function beforeProcess(
         QueryProcessor $subject,
