@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.1](https://github.com/graycoreio/magento2-graphql-introspection-cache/compare/v0.2.0...v0.2.1) (2026-03-04)
+
+
+### Miscellaneous Chores
+
+* remove nodejs deps ([35fb2ec](https://github.com/graycoreio/magento2-graphql-introspection-cache/commit/35fb2ecd25e157830f58f94f61ef0edd173d8ca7))
+
 ## [0.2.0](https://github.com/graycoreio/magento2-graphql-introspection-cache/compare/v0.1.2...v0.2.0) (2025-02-26)
 
 
