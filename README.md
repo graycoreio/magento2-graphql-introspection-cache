@@ -4,9 +4,9 @@
 
 [![Packagist Downloads](https://img.shields.io/packagist/dm/graycore/magento2-graphql-introspection-cache?color=blue)](https://packagist.org/packages/graycore/magento2-graphql-introspection-cache/stats)
 [![Packagist Version](https://img.shields.io/packagist/v/graycore/magento2-graphql-introspection-cache?color=blue)](https://packagist.org/packages/graycore/magento2-graphql-introspection-cache)
-[![Packagist License](https://img.shields.io/packagist/l/graycore/magento2-graphql-introspection-cache)](https://github.com/graycoreio/magento2-graphql-introspection-cache/blob/main/LICENSE)
-[![Unit Test](https://github.com/graycoreio/magento2-graphql-introspection-cache/actions/workflows/unit.yaml/badge.svg)](https://github.com/graycoreio/magento2-graphql-introspection-cache/actions/workflows/unit.yaml)
-[![Integration Test](https://github.com/graycoreio/magento2-graphql-introspection-cache/actions/workflows/integration.yaml/badge.svg)](https://github.com/graycoreio/magento2-graphql-introspection-cache/actions/workflows/integration.yaml)
+[![Packagist License](https://img.shields.io/packagist/l/graycore/magento2-graphql-introspection-cache)](https://github.com/graycoreio/magento2-graphql-introspection-cache/blob/master/LICENSE)
+[![MageCheck Status](https://img.shields.io/github/actions/workflow/status/graycoreio/magento2-graphql-introspection-cache/check-extension.yaml?&label=MageCheck&labelColor=1a1a1a)](https://github.com/graycoreio/magento2-graphql-introspection-cache/actions/workflows/check-extension.yaml)
+![MageCheck Supported Version](https://img.shields.io/badge/currently_supported-any?label=MageCheck%20Supported&labelColor=1a1a1a&color=090c9b)
 
 </div>
 
