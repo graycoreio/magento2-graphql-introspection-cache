@@ -18,12 +18,16 @@ class ReferenceExecutorTest extends TestCase
             }
             return false; // Let PHP handle other errors as usual
         });
-        
-        /**
-         * @var ExecutionContext $context
-         */
-        $context = $this->getMockBuilder(ExecutionContext::class)->disableOriginalConstructor()->getMock();
-        $exec = new ReferenceExecutor($context);
-        $this->assertTrue(true);
+
+        try {
+            /**
+             * @var ExecutionContext $context
+             */
+            $context = $this->createStub(ExecutionContext::class);
+            $exec = new ReferenceExecutor($context);
+            $this->assertTrue(true);
+        } finally {
+            restore_error_handler();
+        }
     }
 }
