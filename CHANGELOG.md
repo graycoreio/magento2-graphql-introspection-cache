@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.2](https://github.com/graycoreio/magento2-graphql-introspection-cache/compare/v0.2.1...v0.2.2) (2026-05-18)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** upgrade to phpunit/phpunit:^12 and magento/magento-coding-standard:^40 ([8534f44](https://github.com/graycoreio/magento2-graphql-introspection-cache/commit/8534f44b8a2e759b0c8afe12c1386bf5afb39b23))
+* **deps:** bump graycoreio/github-actions-magento2 from [@main](https://github.com/main) to 8.2.0 ([31a98bb](https://github.com/graycoreio/magento2-graphql-introspection-cache/commit/31a98bb7b2702127ab2db27f56ed6b124e87d71f))
+
 ## [0.2.1](https://github.com/graycoreio/magento2-graphql-introspection-cache/compare/v0.2.0...v0.2.1) (2026-03-04)
 
 
