@@ -11,7 +11,6 @@
 # A CodeOwner should only review what they are comfortable reviewing. If you're not comfortable, say something.
 # It is a CodeOwners responsibility to only accept the changes that they understand and deem necessary.
 # The CodeOwners have final say on whether or not code is accepted.
-# If multiple CodeOwners are listed, ALL code owners must approve the PR prior to merge.
 # CodeOwners work in conjunction with Github's "Number of Required Approvals (1)" requirement.
 
 
@@ -21,6 +20,7 @@
 # ================================================
 
 #  damienwebdev - Damien Retzinger
+#  gray-bot - Graycore automation bot
 
 
 ######################################################################################################
@@ -42,6 +42,15 @@
 # ================================================
 
 * @damienwebdev
+
+
+# ================================================
+#  Dependency automation
+# ================================================
+# gray-bot owns the paths Dependabot touches so its auto-approve
+# satisfies "Require review from Code Owners".
+
+/.github/workflows/                                             @damienwebdev @gray-bot
 
 
 # ================================================
