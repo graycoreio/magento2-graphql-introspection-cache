@@ -8,7 +8,7 @@ permissions: {}
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'graycoreio/magento2-graph-ql-cache'
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'graycoreio/magento2-graphql-introspection-cache'
     steps:
       # Approve and merge as gray-bot, a code owner of the dependency
       # files, so the review satisfies "Require review from Code Owners".
