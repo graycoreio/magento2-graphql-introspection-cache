@@ -6,6 +6,8 @@ use Closure;
 use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use GraphQL\Executor\Promise\Promise;
 use GraphQL\Executor\ReferenceExecutor;
+use GraphQL\Language\AST\FieldNode;
+use GraphQL\Language\AST\StringValueNode;
 use Magento\Framework\GraphQl\Query\Resolver\IdentityInterface;
 use Magento\GraphQlCache\Model\CacheableQuery;
 
@@ -56,13 +58,17 @@ class CachePlugin
         }
 
         foreach ($executionContext->operation->selectionSet->selections as $selection) {
-            if ($selection->name->value !== '__type') {
+            if (!$selection instanceof FieldNode || $selection->name->value !== '__type') {
                 continue;
             }
 
             foreach ($selection->arguments as $argument) {
+                if ($argument->name->value !== 'name' || !$argument->value instanceof StringValueNode) {
+                    continue;
+                }
+
                 $handlerKey = $argument->value->value;
-                if ($argument->name->value !== 'name' || !isset($this->introspectionHandlers[$handlerKey])) {
+                if (!isset($this->introspectionHandlers[$handlerKey])) {
                     continue;
                 }
 
